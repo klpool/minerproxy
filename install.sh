@@ -50,8 +50,8 @@ else
 
 fi
 
-if [ ! -d "/etc/MinerProxy-Eth/" ]; then
-    mkdir /etc/MinerProxy-Eth/
+if [ ! -d "/etc/minerproxy/" ]; then
+    mkdir /etc/minerproxy/
 fi
 
 error() {
@@ -59,7 +59,7 @@ error() {
 }
 
 install_download() {
-    installPath="/etc/MinerProxy-Eth"
+    installPath="/etc/minerproxy"
     $cmd update -y
     if [[ $cmd == "apt-get" ]]; then
         $cmd install -y lrzsz git zip unzip curl wget supervisor
@@ -71,10 +71,10 @@ install_download() {
         systemctl enable supervisord
         service supervisord restart
     fi
-    [ -d ./MinerProxy-Eth ] && rm -rf ./MinerProxy-Eth
+    [ -d ./minerproxy ] && rm -rf ./minerproxy
     git clone https://github.com/klpool/minerproxy.git
 
-    if [[ ! -d ./MinerProxy-Eth ]]; then
+    if [[ ! -d ./minerproxy ]]; then
         echo
         echo -e "$red 克隆脚本仓库出错了...$none"
         echo
@@ -82,7 +82,7 @@ install_download() {
         echo
         exit 1
     fi
-    cp -rf ./MinerProxy-Eth /etc/
+    cp -rf ./minerproxy/etc/
     if [[ ! -d $installPath ]]; then
         echo
         echo -e "$red 复制文件出错了...$none"
@@ -158,7 +158,7 @@ start_write_config() {
     echo
     echo "安装完成...守护模式无日志，需要日志的请以nohup ./minerProxy_3.0.3_linux &方式运行"
     echo
-    echo "以下配置文件：/etc/MinerProxy-Eth/config.yml，网页端可修改登录密码token"
+    echo "以下配置文件：/etc/minerproxy/config.yml，网页端可修改登录密码token"
     echo
     echo "[*---------]"
     sleep 1
@@ -172,7 +172,7 @@ start_write_config() {
     sleep 1
     echo "[******----]"
     echo
-    cat /etc/MinerProxy-Eth/config.yml
+    cat /etc/minerproxy/config.yml
     echo "----------------------------------------------------------------"
 }
 
@@ -194,7 +194,7 @@ while :; do
     echo
     echo "-------- MinerProxy 一键安装脚本 by:MinerProxy--------"
     echo "github下载地址:https://github.com/klpool/minerproxy"
-    echo 
+    echo "官方qq群771534340 "
     echo
     echo " 1. 安装MinerProxy"
     echo
